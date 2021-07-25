@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace pivotal.Models
 {
-    public class ProjectModel
+    public class ProjectDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsPublic { get; set; }
-        // public List<StoryModel> StoryList { get; set; }
+        public List<StoryDto> Stories { get; } = new List<StoryDto>();
+        public int StoryCount { get; set; }
     }
 }

@@ -10,6 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using pivotal.BL;
+using pivotal.BL.Interfaces;
+using pivotal.DAL;
+using pivotal.DAL.Interfaces;
 
 namespace pivotalHeroku
 {
@@ -31,6 +35,11 @@ namespace pivotalHeroku
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "pivotalHeroku", Version = "v1" });
             });
+            services.Configure((System.Action<PivotalConfiguration>)(options => Configuration.GetSection("pivotal").Bind(options)));
+            services.AddSingleton<IProjectBL, ProjectBL>();
+            services.AddSingleton<IStoryBL, StoryBL>();
+            services.AddSingleton<IProjectDAL, ProjectDAL>();
+            services.AddSingleton<IStoryDAL, StoryDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +53,11 @@ namespace pivotalHeroku
             }
 
             app.UseRouting();
+            app.UseCors(x => x
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin
+            .AllowCredentials());
 
             app.UseAuthorization();
 
