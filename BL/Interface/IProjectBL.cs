@@ -16,7 +16,7 @@ namespace pivotal.BL.Interfaces
     public interface IProjectBL
     {
         public Task<ProjectDto> GetProjectById(int projectId);
-        public Task<int> AddProject(string name, bool isPublic);
+        public Task<int> AddProject(string name, bool isPublic, int ownerId);
         public Task<bool> DeleteProject(int projectId);
         public Task<bool> UpdateProject(int id, string name, bool isPublic);
     }

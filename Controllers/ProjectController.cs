@@ -21,10 +21,8 @@ namespace pivotalHeroku.Controllers
         private readonly ILogger<ProjectController> _logger;
         private readonly IProjectBL _project;
         private readonly string schema = "pivotal";
-        string connectionString1 = "SERVER=127.0.0.1;Port=3306;UID=root;PASSWORD=Mango@Pine;DATABASE=pivotal";
-        string connectionString = "SERVER=localhost;Port=3306;UID=root;PASSWORD=Mango@Pine;DATABASE=pivotal";
+        // string ConnectionString1 = "SERVER=127.0.0.1;Port=3306;UID=root;PASSWORD=Mango@Pine;DATABASE=pivotal;UseAffectedRows=True";
         // string connectionString2 = "SERVER=remotemysql.com;Port=3306;UID=3t0jhQo36v;PASSWORD=nxwVLNMN09;DATABASE=3t0jhQo36v";
-
         public ProjectController(ILogger<ProjectController> logger, IProjectBL project)
         {
             _logger = logger;
@@ -38,9 +36,9 @@ namespace pivotalHeroku.Controllers
             return await _project.GetProjectById(id);
         }
         [HttpPost("create/project/")]
-        public async Task<int> Post([FromBody] ProjectDto project)
+        public async Task<int> Post(ProjectDto project)
         {
-            return await _project.AddProject(project.Name, project.IsPublic);
+            return await _project.AddProject(project.Name, project.IsPublic, project.OwnerId);
         }
         [HttpPut("update/project/")]
         public async Task<bool> Put([FromBody] ProjectDto project)

@@ -1,3 +1,12 @@
+CREATE TABLE `3t0jhQo36v`.`Project` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(200) NOT NULL,
+  `IsPublic` BIT NOT NULL DEFAULT true,
+  `OwnerId` INT NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
+
+
 CREATE TABLE `pivotal`.`Story` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `projectId` INT NOT NULL,

@@ -25,9 +25,9 @@ namespace pivotal.BL
         {
             return await _project.GetProjectById(projectId);
         }
-        public async Task<int> AddProject(string name, bool isPublic)
+        public async Task<int> AddProject(string name, bool isPublic, int ownerId)
         {
-            return await _project.AddProject(name, isPublic);
+            return await _project.AddProject(name, isPublic, ownerId);
         }
         public async Task<bool> DeleteProject(int projectId)
         {

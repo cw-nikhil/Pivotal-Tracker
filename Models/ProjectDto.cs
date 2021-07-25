@@ -10,5 +10,6 @@ namespace pivotal.Models
         public bool IsPublic { get; set; }
         public List<StoryDto> Stories { get; } = new List<StoryDto>();
         public int StoryCount { get; set; }
+        public int OwnerId { get; set; }
     }
 }
