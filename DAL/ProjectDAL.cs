@@ -28,7 +28,7 @@ namespace pivotal.DAL
         {
             var d = _options.Value;
             // string sql = $"SELECT * FROM {_options.Value.Schema}.Project WHERE Id = @id";
-            string sql = $@"SELECT s.id, s.title, s.points, s.type, s.state, p.Name, p.IsPublic
+            string sql = $@"SELECT s.id, s.title, s.points, s.type, s.state, p.Name, p.IsPublic, p.OwnerId
                             FROM {_options.Value.Schema}.Story s
                             RIGHT JOIN {_options.Value.Schema}.Project p
                             ON s.projectId = p.id
@@ -111,7 +111,7 @@ namespace pivotal.DAL
         public async Task<bool> UpdateProject(int id, string name, bool isPublic)
         {
             string sql = $"UPDATE {_options.Value.Schema}.Project SET ";
-            sql += string.IsNullOrEmpty(name) ? "Name = @name, " : string.Empty;
+            sql += !string.IsNullOrEmpty(name) ? "Name = @name, " : string.Empty;
             sql += "IsPublic = @isPublic WHERE id = @id";
             try
             {
