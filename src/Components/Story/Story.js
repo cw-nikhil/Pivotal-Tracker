@@ -54,17 +54,18 @@ function Story(props) {
 			<textarea className="storyTitle">{title}</textarea>
 			<StoryInfo {...story} setIsClicked={setIsClicked} />
 			<CommentList storyId={id} />
+		</div>
+	)
+}
+
+export default Story;
+
 			{/* <Comment
 				commentText="comment text"
 				lastUpdated={Date.now}
 				authorName="Nikhil"
 				isOwnComment={1}
 			/> */}
-		</div>
-	)
-}
-
-export default Story;
 
 {/* <TaskList taskList = {taskList}/> */ }
 {/* <BlockerList blockerList = {blockerList}/> */ }

@@ -7,11 +7,19 @@ function CommentList({ storyId }) {
   const [shouldFetch, setShouldFetch] = useState(0);
   const [hasFetched, setHasFetched] = useState(0);
   const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    if (document.querySelector(".newComment")) {
+      document.querySelector(".newComment").value = "";
+    }
+  })
+
   const fetchComments = async () => {
     setShouldFetch(1);
     const response = await fetchData(getCommentsApi(storyId));
     if (response.comments && response.comments.length >= 0) {
       setComments(response.comments);
+      console.log(response.comments);
     }
     setHasFetched(1);
   }
@@ -19,15 +27,19 @@ function CommentList({ storyId }) {
     const commentText = document.querySelector(".newComment").value;
     const newComment = {
       text: commentText,
-      writerId: JSON.parse(localStorage.getItem("user")).id,
       storyId: storyId
     };
-    const response = await fetchData(postCommentApi, "POST", newComment);
-    if (response.commentId && response.commentId > 0) {
-      setComments([...comments, newComment])
+    try {
+      const response = await fetchData(postCommentApi, "POST", newComment);
+      if (response?.message) {
+        alert(response.message);
+      }
+      else {
+        setComments([...comments, { ...newComment, id: response.commentId }])
+      }
     }
-    else {
-      alert("Some error submitting your comment");
+    catch (e) {
+      alert("Some error submitting your comment. please try again");
     }
   }
   if (!shouldFetch) {
