@@ -9,6 +9,7 @@ namespace pivotal.Models
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public int WriterId { get; set; }
+        public string WriterName { get; set; }
         public int StoryId { get; set; }
     }
 }

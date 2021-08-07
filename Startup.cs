@@ -42,9 +42,13 @@ namespace pivotalHeroku
             services.AddSingleton<IProjectBL, ProjectBL>();
             services.AddSingleton<IStoryBL, StoryBL>();
             services.AddSingleton<IUserBL, UserBL>();
+            services.AddSingleton<ICommentBL, CommentBL>();
+
             services.AddSingleton<IProjectDAL, ProjectDAL>();
             services.AddSingleton<IStoryDAL, StoryDAL>();
             services.AddSingleton<IUserDAL, UserDAL>();
+            services.AddSingleton<ICommentDAL, CommentDAL>();
+
             services.AddTransient<Jwt>();
 
             // services.AddAuthentication(options =>

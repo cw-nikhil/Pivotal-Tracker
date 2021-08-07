@@ -42,10 +42,7 @@ namespace pivotalHeroku.Controllers
             {
                 return BadRequest(new { message = "you need to sign in to comment" });
             }
-            if (userId != comment.WriterId)
-            {
-                return BadRequest(new { message = "authentication error" });
-            }
+            comment.WriterId = userId;
             return Ok(new { commentId = await _comment.AddComment(comment) });
         }
         [HttpPut("update/comment/")]

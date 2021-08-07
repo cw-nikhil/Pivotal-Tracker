@@ -13,7 +13,7 @@ namespace pivotalHeroku.Utils
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secureKey));
             var credentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
             var jwtHeader = new JwtHeader(credentials);
-            var jwtPayload = new JwtPayload(userId.ToString(), null, null, null, DateTime.Now.AddDays(1));
+            var jwtPayload = new JwtPayload(userId.ToString(), null, null, null, DateTime.Now.AddDays(15));
             var securityToken = new JwtSecurityToken(jwtHeader, jwtPayload);
             return new JwtSecurityTokenHandler().WriteToken(securityToken);
         }

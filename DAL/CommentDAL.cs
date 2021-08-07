@@ -25,7 +25,8 @@ namespace pivotal.DAL
         public async Task<List<CommentDto>> GetCommentsByStoryId(int storyId)
         {
             var d = _options.Value;
-            string sql = $@"SELECT * from {_options.Value.Schema}.Comment
+            string sql = $@"SELECT c.*, u.Name AS WriterName from {_options.Value.Schema}.Comment c
+                            INNER JOIN {_options.Value.Schema}.User u ON c.writerId = u.id
                             WHERE storyId = @storyId;";
             try
             {

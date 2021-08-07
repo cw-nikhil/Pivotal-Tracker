@@ -64,8 +64,9 @@ namespace pivotalHeroku.Controllers
                 _jwt.GetJwtByUserId(dbUser.Id),
                 new CookieOptions
                 {
-                    Expires = DateTime.Now.AddMinutes(10),
-                    HttpOnly = false,
+                    Expires = DateTime.Now.AddDays(15),
+                    HttpOnly = true,
+                    // Secure = true,
                 }
             );
             var responseOb = new

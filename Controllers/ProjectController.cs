@@ -37,6 +37,9 @@ namespace pivotalHeroku.Controllers
             int userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
             var project = await _project.GetProjectById(projectId, userId);
             if (project == null) {
+                if (userId == 0) {
+                    return Ok(new {project = "This project is not available. Try signing in", success = 0});
+                }
                 return Ok(new {project = "You either don't have access to this prject or it doesn't exist", success = 0});
             }
             return Ok(new {project = project});
