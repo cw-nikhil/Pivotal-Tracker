@@ -1,0 +1,18 @@
+.storyInfo {
+	width: 50%;
+	background-color: pink;
+	padding: 1%
+}
+
+.firstRow {
+	width: 100%;
+	border-radius: 3px;
+	padding: 2%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border: 1px solid black;
+	background-color: lightgoldenrodyellow;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}

@@ -1,12 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import Just from "./Just";
+import Login from "./Components/Authentication/Login";
+import Signup from './Components/Authentication/Signup';
+import AddStory from './Components/Story/AddStory';
+import Project from './Components/Project/Project';
+import AllProjects from './Components/Project/AllProjects';
+import Header from "./Components/Header/Header";
+
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     {/* <App /> */}
+//     <Just id = "1"/>
+//     <br/>
+//     <br/>
+//     <br/>
+//     <Login />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Route path="/" component={Header} />
+      <Route path="/login/" component={Login} />
+      <Route path="/signup/" component={Signup} />
+      <Route path="/add/Story" component={AddStory} />
+      <Route path="/project/:id" component={(id) => <Project id={1} />} />
+      <Route path="/allprojects" component={AllProjects} />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

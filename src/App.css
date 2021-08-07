@@ -84,29 +84,6 @@ button {
 	text-align: center;
 }
 
-.firstRow {
-	width: 100%;
-	border-radius: 3px;
-	padding: 2%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border: 1px solid black;
-	background-color: lightgoldenrodyellow;
-	justify-content: space-between;
-	margin-bottom: 10px;
-}
-
-.storyTitle {
-	width: 90%;
-	height: 50px;
-	margin: auto 5%;
-	font-size: 20px;
-	text-align: center;
-	padding: 50px auto;
-	background-color: rgb(187, 187, 187);;
-}
-
 span {
 	border: 1px solid black;
 	padding: 5px;
@@ -165,12 +142,6 @@ option {
 	background-color: yellow;
 }
 
-.storyInfo {
-	width: 50%;
-	background-color: pink;
-	padding: 1%
-}
-
 .lastUpdated {
 	text-align: center;
 	font-size: 18px;
@@ -221,22 +192,5 @@ option {
 	cursor: pointer;
 }
 
-.collapsedStory {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	cursor: pointer;
-	border: 1px solid black;
-	background-color: coral;
-}
-
-.commentAuthor {
-	font-size: 20px;
-}
-
-.commentText {
-	font-size: 15px;
-}
 
 /* style = {{backgroundColor: col[i], height: "50px", textAlign: "center"}} */
