@@ -31,3 +31,12 @@ CREATE TABLE `pivotal`.`Story` (
   `projectId` INT NOT NULL,
   `userId` INT NOT NULL);
 
+CREATE TABLE `pivotal`.`UserProjectMapping` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `projectId` INT NOT NULL,
+  `userId` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+
+

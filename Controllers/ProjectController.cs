@@ -10,6 +10,7 @@ using pivotal.Models;
 using pivotalHeroku.Models;
 using Dapper;
 using pivotal.BL.Interfaces;
+using pivotalHeroku.Utils;
 
 namespace pivotalHeroku.Controllers
 {
@@ -18,28 +19,41 @@ namespace pivotalHeroku.Controllers
     public class ProjectController : ControllerBase
     {
         // https://codeforces.com/blog/entry/92223
-        private readonly ILogger<ProjectController> _logger;
         private readonly IProjectBL _project;
-        private readonly string schema = "pivotal";
+        private readonly Jwt _jwt;
+        private const string _jwtCookieName = "jwt";
         // string ConnectionString1 = "SERVER=127.0.0.1;Port=3306;UID=root;PASSWORD=Mango@Pine;DATABASE=pivotal;UseAffectedRows=True";
         // string connectionString2 = "SERVER=remotemysql.com;Port=3306;UID=3t0jhQo36v;PASSWORD=nxwVLNMN09;DATABASE=3t0jhQo36v";
-        public ProjectController(ILogger<ProjectController> logger, IProjectBL project)
+        public ProjectController(IProjectBL project, Jwt jwt)
         {
-            _logger = logger;
             _project = project;
+            _jwt = jwt;
         }
 
         [HttpGet]
-        [Route("get/project/{id}/")]
-        public async Task<ProjectDto> Get(int id)
+        [Route("get/project/{projectId}/")]
+        public async Task<IActionResult> Get(int projectId)
         {
-            return await _project.GetProjectById(id);
+            int userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
+            var project = await _project.GetProjectById(projectId, userId);
+            if (project == null) {
+                return Ok(new {project = "You either don't have access to this prject or it doesn't exist", success = 0});
+            }
+            return Ok(new {project = project});
+        }
+        [HttpGet]
+        [Route("get/allprojects/")]
+        public async Task<IActionResult> GetAllProjects()
+        {
+            int userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
+            return Ok(new {projectList = await _project.GetProjectsByUserId(userId)});
+            // return Ok(new {projectList = new List<ProjectDto>()});
         }
         [HttpPost("create/project/")]
         public async Task<int> Post(ProjectDto project)
         {
-            return 5;
-            // return await _project.AddProject(project.Name, project.IsPublic, project.OwnerId);
+            int userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
+            return await _project.AddProject(project.Name, project.IsPublic, userId);
         }
         [HttpPut("update/project/")]
         public async Task<bool> Put([FromBody] ProjectDto project)

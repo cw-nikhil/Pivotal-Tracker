@@ -21,9 +21,9 @@ namespace pivotal.BL
         {
             _project = project;
         }
-        public async Task<ProjectDto> GetProjectById(int projectId)
+        public async Task<ProjectDto> GetProjectById(int projectId, int userId)
         {
-            return await _project.GetProjectById(projectId);
+            return await _project.GetProjectById(projectId, userId);
         }
         public async Task<int> AddProject(string name, bool isPublic, int ownerId)
         {
@@ -36,6 +36,9 @@ namespace pivotal.BL
         public async Task<bool> UpdateProject(int id, string name, bool isPublic)
         {
             return await _project.UpdateProject(id, name, isPublic);
+        }
+        public async Task<List<ProjectDto>> GetProjectsByUserId(int userId) {
+            return await _project.GetProjectsByUserId(userId);
         }
     }
 }

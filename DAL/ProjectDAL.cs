@@ -24,15 +24,14 @@ namespace pivotal.DAL
         }
         // private const string _options.Value.ConnectionString = "SERVER=127.0.0.1;Port=3306;UID=root;PASSWORD=Mango@Pine;DATABASE=pivotal";
         // string _options.Value.ConnectionString = "SERVER=remotemysql.com;Port=3306;UID=F7NtycWf0x;PASSWORD=3n1wCr6EAD;DATABASE=F7NtycWf0x";
-        public async Task<ProjectDto> GetProjectById(int id)
+        public async Task<ProjectDto> GetProjectById(int projectId, int userId)
         {
             var d = _options.Value;
-            // string sql = $"SELECT * FROM {_options.Value.Schema}.Project WHERE Id = @id";
-            string sql = $@"SELECT s.id, s.title, s.points, s.type, s.state, p.Name, p.IsPublic, p.OwnerId
-                            FROM {_options.Value.Schema}.Story s
-                            RIGHT JOIN {_options.Value.Schema}.Project p
-                            ON s.projectId = p.id
-                            WHERE p.id = @id;";
+            string sql = $@"SELECT DISTINCT s.id, s.title, s.points, s.type, s.state, p.Name, p.IsPublic
+                            FROM {_options.Value.Schema}.Project p
+                            LEFT JOIN {_options.Value.Schema}.Story s ON s.projectId = p.id
+                            LEFT JOIN {_options.Value.Schema}.UserProjectMapping m ON p.Id = m.projectId
+                            WHERE p.id = @projectId AND (m.userId = @userId OR p.IsPublic = 1);";
             try
             {
                 using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
@@ -50,11 +49,12 @@ namespace pivotal.DAL
                             return project;
                         },
                         splitOn: "Name",
-                        param: new { id }
+                        param: new { projectId, userId }
                     );
                     if (projectList == null || projectList.Count() == 0)
                     {
-                        return new ProjectDto();
+                        return null;
+                        // return new ProjectDto();
                     }
                     var project = projectList.FirstOrDefault();
                     project.Stories.AddRange(storyList);
@@ -63,7 +63,29 @@ namespace pivotal.DAL
             }
             catch (Exception e)
             {
-                return new ProjectDto();
+                // return new ProjectDto();
+                return null;
+            }
+        }
+        public async Task<List<ProjectDto>> GetProjectsByUserId(int userId)
+        {
+            string sql = $@"SELECT p.Id, p.Name, p.IsPublic, m.userid FROM {_options.Value.Schema}.Project p
+                            LEFT JOIN {_options.Value.Schema}.UserProjectMapping m ON p.Id = m.projectId AND m.userId = @userId
+                            where m.userid = @userId OR p.isPublic = 1;";
+            try
+            {
+                using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
+                {
+                    var projectList = await con.QueryAsync<ProjectDto>(sql, new { userId });
+                    if (projectList == null) {
+                        return new List<ProjectDto>();
+                    }
+                    return projectList.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<ProjectDto>();
             }
         }
         public async Task<int> AddProject(string name, bool isPublic, int ownerId)
@@ -128,3 +150,20 @@ namespace pivotal.DAL
         }
     }
 }
+
+
+
+// public async Task<List<ProjectDto> GetProjectsByUserId(int userId) {
+//     string sql = $@"SELECT p.Id, p.Name, p.IsPublic, m.userid FROM pivotal.Project p
+//                     LEFT JOIN pivotal.UserProjectMapping m ON p.Id = m.projectId AND m.userId = @userId
+//                     where m.userid = @userId Or p.isPublic = 1;";
+//     try {
+//         using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString)) {
+//             var projectList = await con.QueryAsync(sql, new {id});
+//             return projectList.ToList();
+//         }
+//     }
+//     catch (Exception e) {
+//         return new List<ProjectDto>();
+//     }
+// }

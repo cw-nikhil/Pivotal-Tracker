@@ -56,7 +56,7 @@ namespace pivotalHeroku.Controllers
             var dbUser = await _user.GetUserByEmail(user.Email);
             if (dbUser == null || !BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
             {
-                return BadRequest("Invalid Crdentials");
+                return BadRequest(new {message = "Invalid Crdentials"});
             }
             Response.Cookies.Append
             (
@@ -68,7 +68,13 @@ namespace pivotalHeroku.Controllers
                     HttpOnly = false,
                 }
             );
-            return Ok(new { message = "User logged in" });
+            var responseOb = new
+            {
+                message = "success",
+                id = dbUser.Id,
+                name = dbUser.Name
+            };
+            return Ok(responseOb);
 
         }
         [HttpPost("logout/")]
@@ -78,7 +84,8 @@ namespace pivotalHeroku.Controllers
             return Ok(new { message = "user successfully logged out" });
         }
         [HttpGet("user")]
-        public async Task<IActionResult> Get() {
+        public async Task<IActionResult> Get()
+        {
             string jwt = Request.Cookies[_jwtCookieName];
             var user = await _user.GetLoggedInUser(jwt);
             return Ok(user);
