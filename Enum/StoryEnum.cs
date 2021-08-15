@@ -10,7 +10,7 @@ namespace pivotal.Enum.StoryEnum
         UnStarted = 0,
         Started = 1,
         Finished = 2,
-        Delieverd = 3,
+        Delivered = 3,
         Accepted = 4
     }
 }

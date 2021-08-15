@@ -10,6 +10,7 @@ using pivotal.Models;
 using pivotalHeroku.Models;
 using Dapper;
 using pivotal.BL.Interfaces;
+using pivotalHeroku.Utils;
 
 namespace pivotalHeroku.Controllers
 {
@@ -18,9 +19,12 @@ namespace pivotalHeroku.Controllers
     public class StoryController : ControllerBase
     {
         private readonly IStoryBL _story;
-        public StoryController(IStoryBL story)
+        private readonly Jwt _jwt;
+        private const string _jwtCookieName = "jwt";
+        public StoryController(IStoryBL story, Jwt jwt)
         {
             _story = story;
+            _jwt = jwt;
         }
         [HttpGet]
         [Route("get/story/{id}/")]
@@ -29,13 +33,26 @@ namespace pivotalHeroku.Controllers
             return await _story.GetStoryById(id);
         }
         [HttpPost("create/story/")]
-        public async Task<int> Post([FromBody] StoryDto story)
+        public async Task<IActionResult> Post(StoryDto story)
         {
-            if (story.ProjectId == 0 || string.IsNullOrEmpty(story.Title) || string.IsNullOrEmpty(story.Description))
-            {
-                return 0;
+            int userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
+            if (userId == 0) {
+                return Ok(new {message = "You need to be logged in to create a new story"});
             }
-            return await _story.AddStory(story);
+            if (story.ProjectId == 0)
+            {
+                return Ok(new {message = "Invalid request for creating story"});
+            }
+            if (string.IsNullOrEmpty(story.Title))
+            {
+                return Ok(new {message = "Story title can't be null"});
+            }
+            story.RquesterId = userId;
+            int id = await _story.AddStory(story);
+            if (id == 0) {
+                return Ok(new {message = "some error creating story"}); 
+            } 
+            return Ok(new {id = id, message = "story created successfully"});
         }
         [HttpPut("update/story/")]
         public async Task<bool> Put([FromBody] StoryDto story)
