@@ -10,34 +10,40 @@ function StoryInfo(props) {
 	}
 	console.log("ExpandedStory");
 	const storyLinkTitle = "click to copy this story's link to your clipboard";
-	const storyIdTitle = "click to copy this story's id to your clipboard"; 
+	const storyIdTitle = "click to copy this story's id to your clipboard";
 	let {
 		id,
-		storyType,
+		title,
+		description,
+		type,
 		points,
-		requester,
-		owner,
+		requesterId,
+		ownerId,
 		lastUpdated,
 		setIsClicked
 	} = props;
 
 	return (
-		<div className="storyInfo">
-			<div className="firstRow">
-				<div className="first">
-					<span class="spans" title={storyLinkTitle}>storyLink</span>
-					<span class="spans" title={storyIdTitle}>story id</span>
-					<span>{id}</span>
+		<>
+			<textarea className="storyTitle">{title}</textarea>
+			<div className="storyInfo">
+				<div className="firstRow">
+					<div className="first">
+						<span class="spans" title={storyLinkTitle}>storyLink</span>
+						<span class="spans" title={storyIdTitle}>story id</span>
+						<span>{id}</span>
+					</div>
+					<div className="second">
+						<button className="delete" title="delete this story" onClick={() => deleteStory()}>Delete</button>
+						<button className="collapse" title="collapse this story" onClick={() => setIsClicked(0)}>Collapse</button>
+					</div>
 				</div>
-				<div className="second">
-					<button className="delete" title="delete this story" onClick = {() => deleteStory()}>Delete</button>
-					<button className="collapse" title = "collapse this story" onClick={() => setIsClicked(0)}>Collapse</button>
+				<div className="storyTable">
+					<StoryTable {...props} />
 				</div>
+				<textarea className="storyDescription">{description}</textarea>
 			</div>
-			<div className="storyTable">
-				<StoryTable {...props} />
-			</div>
-		</div>
+		</>
 	)
 }
 

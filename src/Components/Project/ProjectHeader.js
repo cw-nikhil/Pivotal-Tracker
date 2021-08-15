@@ -12,16 +12,16 @@ function ProjectHeader({ id, name, activeTab }) {
       <div className="navigationMenu">
         <Link to={storiesUrl} className={`navigationTab${activeTab === "stories" ? " activeTab" : ""}`}>Stories</Link>
         <Link to={membersUrl} className={`navigationTab${activeTab === "members" ? " activeTab" : ""}`}>Members</Link>
-        {UserTab(user)}
+        {UserTab(id)}
       </div>
     </div>
   )
 }
 
-const UserTab = user => {
+const UserTab = id => {
   return (
     <div className="addstory">
-       <Link className="navigationTab" to={`/user/${user.id}`}>Add story</Link>
+       <Link className="navigationTab" to={`/add/story/${id}`}>Add story</Link>
     </div>
   )
   // if (user) {

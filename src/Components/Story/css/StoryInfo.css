@@ -16,3 +16,13 @@
 	justify-content: space-between;
 	margin-bottom: 10px;
 }
+
+.storyDescription {
+	width: 90%;
+	height: 50px;
+	line-height: 50px;
+	margin: 10px;
+	font-size: 20px;
+	text-align: center;
+	background-color: rgb(187, 187, 187);
+}

@@ -51,7 +51,6 @@ function Story(props) {
 
 	return (
 		<div className="storyContainer">
-			<textarea className="storyTitle">{title}</textarea>
 			<StoryInfo {...story} setIsClicked={setIsClicked} />
 			<CommentList storyId={id} />
 		</div>

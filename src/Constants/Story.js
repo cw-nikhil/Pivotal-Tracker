@@ -8,7 +8,8 @@ export const storyState = {
 };
 
 export const storyType = {
-    feature: "feature",
-    chore: "chore",
-    bug: "bug"
+    none: 0,
+    feature: 1,
+    chore: 2,
+    bug: 3
 };
