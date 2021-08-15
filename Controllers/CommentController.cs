@@ -42,6 +42,9 @@ namespace pivotalHeroku.Controllers
             {
                 return BadRequest(new { message = "you need to sign in to comment" });
             }
+            if (string.IsNullOrEmpty(comment.Text)) {
+                return BadRequest(new { message = "comment can't be empty" });
+            }
             comment.WriterId = userId;
             return Ok(new { commentId = await _comment.AddComment(comment) });
         }
