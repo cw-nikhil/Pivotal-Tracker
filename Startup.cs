@@ -68,11 +68,10 @@ namespace pivotalHeroku
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "pivotalHeroku v1"));
             }
-            app.UseCookiePolicy(new CookiePolicyOptions
-            {
-                HttpOnly = HttpOnlyPolicy.Always
-            });
-
+            // app.UseCookiePolicy(new CookiePolicyOptions
+            // {
+            //     HttpOnly = HttpOnlyPolicy.Always
+            // });
             app.UseRouting();
             app.UseCors(x => x
             .AllowAnyMethod()

@@ -22,6 +22,7 @@ namespace pivotalHeroku.Controllers
         private readonly IUserBL _user;
         private readonly Jwt _jwt;
         private const string _jwtCookieName = "jwt";
+        private const string _userCookieName = "user";
         public UserController(IUserBL user, Jwt jwt)
         {
             _user = user;
@@ -69,6 +70,15 @@ namespace pivotalHeroku.Controllers
                     // Secure = true,
                 }
             );
+            Response.Cookies.Append
+            (
+                _userCookieName,
+                $"{dbUser.Name}-{dbUser.Id}",
+                new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(15),
+                }
+            );
             var responseOb = new
             {
                 message = "success",
@@ -82,6 +92,7 @@ namespace pivotalHeroku.Controllers
         public IActionResult Logout(UserDto user)
         {
             Response.Cookies.Delete(_jwtCookieName);
+            Response.Cookies.Delete(_userCookieName);
             return Ok(new { message = "user successfully logged out" });
         }
         [HttpGet("user")]
