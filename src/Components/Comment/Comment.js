@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import fetchData from '../../ApiCalls';
 import { updateCommentApi } from "../../ApiUrls";
 import { deleteCommentApi } from "../../ApiUrls";
+import { getUserFromCookie } from '../../Utils';
 import "./css/Comment.css";
 
 export default function Comment(props) {
-    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const currentUser = getUserFromCookie();
     const [isEditMode, setIsEditMode] = useState(0);
     const [isDeleted, setIsDeleted] = useState(0);
     const [text, setText] = useState(props.text);

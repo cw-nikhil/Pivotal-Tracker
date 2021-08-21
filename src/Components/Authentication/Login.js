@@ -15,7 +15,6 @@ const Login = () => {
 			console.log(result);
 			if (result.message === "success") {
 				console.log(result);
-				localStorage.setItem("user", JSON.stringify(result));
 			}
 			setMessage(result.message);
 		}

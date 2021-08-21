@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import "./css/Header.css";
 import fetchData from '../../ApiCalls';
 import { logoutUrl } from '../../ApiUrls';
+import { deleteCookie, getUserFromCookie } from '../../Utils';
 
 const logout = async () => {
   const response = await fetchData(logoutUrl, "POST");
   if (response.message === "user successfully logged out") {
-    localStorage.clear("user");
-    // location.reload();
+    deleteCookie("user");
+    window.location.reload();
   }
 }
 
 function Header({ activeTab }) {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getUserFromCookie();
   // const yourProjects = `/project/${id}`;
   // const membersUrl = `/project/${id}/members`;
   const allProjectsUrl = `/allprojects/`;

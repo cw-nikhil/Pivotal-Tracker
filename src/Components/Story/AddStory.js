@@ -3,9 +3,10 @@ import StoryTable from "./StoryTable";
 import "./css/AddStory.css";
 import fetchData from "../../ApiCalls";
 import { addStoryApi } from "../../ApiUrls";
+import { getUserFromCookie } from "../../Utils";
 
 export default function AddStory({ projectId }) {
-  if (!localStorage.getItem("user")) {
+  if (!getUserFromCookie()) {
     return <div>You need to sign in</div>;
   }
   const saveStory = async () => {
