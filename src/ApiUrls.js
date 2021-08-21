@@ -1,9 +1,13 @@
 const apiHostUrl = "http://localhost:5000/api/";
-export const allProjectsApi = `${apiHostUrl}get/allprojects`;
-export const getProjectApi = id => `${apiHostUrl}get/project/${id}`;
 export const logoutUrl = `${apiHostUrl}logout`;
 export const loginUrl = `${apiHostUrl}login`;
 export const signupUrl = `${apiHostUrl}signup`;
+
+
+//project
+export const allProjectsApi = `${apiHostUrl}get/allprojects`;
+export const getProjectApi = id => `${apiHostUrl}get/project/${id}`;
+export const addProjectApi = `${apiHostUrl}create/project/`;
 
 
 //comments

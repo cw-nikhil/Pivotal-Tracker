@@ -12,6 +12,7 @@ import AddStory from "./Components/Story/AddStory";
 import Project from "./Components/Project/Project";
 import AllProjects from "./Components/Project/AllProjects";
 import Header from "./Components/Header/Header";
+import AddProject from "./Components/Project/AddProject";
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -33,10 +34,11 @@ ReactDOM.render(
       <Route path="/signup/" component={Signup} />
       <Route
         path="/add/Story/:id"
-        component={props => <AddStory projectId={props.match.params.id} />}
+        component={(props) => <AddStory projectId={props.match.params.id} />}
       />
       <Route path="/project/:id" component={(id) => <Project id={1} />} />
       <Route path="/allprojects" component={AllProjects} />
+      <Route path="/add/project" component={AddProject} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
