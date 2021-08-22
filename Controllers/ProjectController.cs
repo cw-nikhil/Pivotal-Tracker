@@ -53,10 +53,18 @@ namespace pivotalHeroku.Controllers
             // return Ok(new {projectList = new List<ProjectDto>()});
         }
         [HttpPost("create/project/")]
-        public async Task<int> Post(ProjectDto project)
+        public async Task<IActionResult> Post(ProjectDto project)
         {
             int userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
-            return await _project.AddProject(project.Name, project.IsPublic, userId);
+            if (userId == 0) {
+                return BadRequest(new {message = "You need to be signed in to create a project"});
+            }
+            int projectId = await _project.AddProject(project.Name, project.IsPublic, userId);
+            if (projectId == 0)
+            {
+                return Ok(new {message = "some error occured while creating your project. Please try again"});
+            }
+            return Ok(new {message = "project created successfully", projectId = projectId});
         }
         [HttpPut("update/project/")]
         public async Task<bool> Put([FromBody] ProjectDto project)
