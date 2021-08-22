@@ -12,6 +12,7 @@ using Dapper;
 using pivotal.DAL.Interfaces;
 using Microsoft.Extensions.Options;
 using pivotalHeroku;
+using pivotal.Enum.ResponseEnum;
 
 namespace pivotal.DAL
 {
@@ -77,7 +78,8 @@ namespace pivotal.DAL
                 using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
                 {
                     var projectList = await con.QueryAsync<ProjectDto>(sql, new { userId });
-                    if (projectList == null) {
+                    if (projectList == null)
+                    {
                         return new List<ProjectDto>();
                     }
                     return projectList.ToList();
@@ -146,6 +148,48 @@ namespace pivotal.DAL
             catch (Exception)
             {
                 return false;
+            }
+        }
+        public async Task<string> AddUserToProject(AddUserToProjectDto request)
+        {
+            int projectId = request.ProjectId;
+            string email = request.Email;
+            int loggedInUserId = request.LoggedInUserId;
+            string getUserIdByEmail = $"SELECT id FROM {_options.Value.Schema}.User WHERE email = @email LIMIT 1";
+            try
+            {
+                using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
+                {
+                    int userId = await con.QueryFirstOrDefaultAsync<int>(getUserIdByEmail, new { email });
+                    if (userId == 0)
+                    {
+                        return ResponseEnum.UserNotExist;
+                    }
+                    if (userId == loggedInUserId)
+                    {
+                        return ResponseEnum.InvalidRequest;
+                    }
+                    string getProjectOwner = $"SELECT ownerId FROM {_options.Value.Schema}.Project WHERE id = @projectId LIMIT 1";
+                    int ownerId = await con.QueryFirstOrDefaultAsync<int>(getProjectOwner, new { projectId });
+                    if (ownerId == 0)
+                    {
+                        return ResponseEnum.ProjectNotExist;
+                    }
+                    if (ownerId != loggedInUserId)
+                    {
+                        return ResponseEnum.NotAuthorized;
+                    }
+                    string addUser = $@"INSERT INTO {_options.Value.Schema}.UserProjectMapping(projectId, userId)
+                                        SELECT @projectId, @userId FROM {_options.Value.Schema}.UserProjectMapping
+                                        WHERE NOT EXISTS (SELECT id from {_options.Value.Schema}.UserProjectMapping where projectId = @projectId AND userId = @userId)
+                                        LIMIT 1;";
+                    int rowsAffected = await con.ExecuteAsync(addUser, new { projectId, userId });
+                    return rowsAffected == 1 ? ResponseEnum.Success : ResponseEnum.UserAlredyAddedInProject;
+                }
+            }
+            catch (Exception e)
+            {
+                return ResponseEnum.Failure;
             }
         }
     }

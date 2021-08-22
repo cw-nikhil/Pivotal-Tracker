@@ -11,15 +11,18 @@ using pivotalHeroku.Models;
 using Dapper;
 using pivotal.DAL.Interfaces;
 using pivotal.BL.Interfaces;
+using pivotal.DAL;
 
 namespace pivotal.BL
 {
     public class ProjectBL : IProjectBL
     {
         IProjectDAL _project;
-        public ProjectBL(IProjectDAL project)
+        IUserDAL _user;
+        public ProjectBL(IProjectDAL project, IUserDAL user)
         {
             _project = project;
+            _user = user;
         }
         public async Task<ProjectDto> GetProjectById(int projectId, int userId)
         {
@@ -37,8 +40,13 @@ namespace pivotal.BL
         {
             return await _project.UpdateProject(id, name, isPublic);
         }
-        public async Task<List<ProjectDto>> GetProjectsByUserId(int userId) {
+        public async Task<List<ProjectDto>> GetProjectsByUserId(int userId)
+        {
             return await _project.GetProjectsByUserId(userId);
+        }
+        public async Task<string> AddUserToProject(AddUserToProjectDto request)
+        {
+            return await _project.AddUserToProject(request);
         }
     }
 }

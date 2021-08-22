@@ -10,5 +10,6 @@ namespace pivotal.Enum.ResponseEnum
         public static string EmailAlreadyExists = "The email id already exists. Please try a different one";
         public static string Success = "Operation successful";
         public static string Failure = "Some error occurred";
+        public static string UserAlredyAddedInProject = "User is already added in this project";
     }
 }

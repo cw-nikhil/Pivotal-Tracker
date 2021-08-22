@@ -20,5 +20,6 @@ namespace pivotal.DAL.Interfaces
         public Task<bool> DeleteProject(int projectId);
         public Task<bool> UpdateProject(int id, string name, bool isPublic);
         public Task<List<ProjectDto>> GetProjectsByUserId(int userId);
+        public Task<string> AddUserToProject(AddUserToProjectDto request);
     }
 }
