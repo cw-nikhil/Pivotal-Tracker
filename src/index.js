@@ -13,6 +13,7 @@ import Project from "./Components/Project/Project";
 import AllProjects from "./Components/Project/AllProjects";
 import Header from "./Components/Header/Header";
 import AddProject from "./Components/Project/AddProject";
+import ProjectMembers from "./Components/Members/ProjectMembers";
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -36,9 +37,10 @@ ReactDOM.render(
         path="/add/Story/:id"
         component={(props) => <AddStory projectId={props.match.params.id} />}
       />
-      <Route path="/project/:id" component={(id) => <Project id={1} />} />
+      <Route path="/project/:id" exact component={(id) => <Project id={1} />} />
       <Route path="/allprojects" component={AllProjects} />
       <Route path="/add/project" component={AddProject} />
+      <Route path="/project/:id/members" component={props => <ProjectMembers projectId={props.match.params.id}/>} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

@@ -32,7 +32,7 @@ export const getUserFromCookie = () => {
 	}
 	return {
 		name: list[0],
-		id: list[1]
+		id: parseInt(list[1])
 	};
 }
 

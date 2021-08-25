@@ -1,7 +1,10 @@
 const apiHostUrl = "http://localhost:5000/api/";
+
+//user
 export const logoutUrl = `${apiHostUrl}logout`;
 export const loginUrl = `${apiHostUrl}login`;
 export const signupUrl = `${apiHostUrl}signup`;
+export const getUsersByProjectId = projectId => `${apiHostUrl}project/${projectId}/members`;
 
 
 //project
