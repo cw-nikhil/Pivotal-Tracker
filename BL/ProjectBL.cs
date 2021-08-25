@@ -44,7 +44,7 @@ namespace pivotal.BL
         {
             return await _project.GetProjectsByUserId(userId);
         }
-        public async Task<string> AddUserToProject(AddUserToProjectDto request)
+        public async Task<string> AddUserToProject(UserProjectDto request)
         {
             return await _project.AddUserToProject(request);
         }

@@ -82,7 +82,7 @@ namespace pivotalHeroku.Controllers
         }
 
         [HttpPost("addUser")]
-        public async Task<IActionResult> AddUserToProject(AddUserToProjectDto request)
+        public async Task<IActionResult> AddUserToProject(UserProjectDto request)
         {
             if (request.ProjectId == 0 || string.IsNullOrEmpty(request.Email))
             {

@@ -2,7 +2,7 @@ using System;
 
 namespace pivotal.Models
 {
-    public class AddUserToProjectDto
+    public class UserProjectDto
     {
         public int ProjectId { get; set; }
         public string Email { get; set; }

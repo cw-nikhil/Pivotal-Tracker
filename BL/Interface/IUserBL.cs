@@ -19,5 +19,6 @@ namespace pivotal.BL.Interfaces
         public Task<UserDto> GetUserByEmail(string email);
         public Task<int> CreateUser(UserDto user);
         public Task<UserDto> GetLoggedInUser(string jwt);
+        public Task<Object> GetUsersByProjectId(UserProjectDto dto);
     }
 }

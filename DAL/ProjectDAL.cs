@@ -150,7 +150,7 @@ namespace pivotal.DAL
                 return false;
             }
         }
-        public async Task<string> AddUserToProject(AddUserToProjectDto request)
+        public async Task<string> AddUserToProject(UserProjectDto request)
         {
             int projectId = request.ProjectId;
             string email = request.Email;

@@ -80,10 +80,32 @@ namespace pivotal.DAL
             }
             catch (Exception e)
             {
-                if (e.Message.Contains("Duplicate entry")) {
+                if (e.Message.Contains("Duplicate entry"))
+                {
                     return -1;
                 }
                 return 0;
+            }
+        }
+
+        public async Task<Tuple<ProjectDto, List<UserDto>>> GetUsersByProjectId(UserProjectDto dto)
+        {
+            try
+            {
+                string usersQuery = $@"SELECT u.Id, u.Name, u.Email from {_options.Value.Schema}.UserProjectMapping m
+                                    INNER JOIN pivotal.User u ON u.id = m.userId
+                                    WHERE m.projectId = @projectId;";
+                string projectQuery = $@"SELECT IsPublic, OwnerId FROM {_options.Value.Schema}.Project WHERE id = @projectId LIMIT 1";
+                using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
+                {
+                    List<UserDto> users = (await con.QueryAsync<UserDto>(usersQuery, new { @projectId = dto.ProjectId })).ToList();
+                    ProjectDto projectDetails = await con.QueryFirstOrDefaultAsync<ProjectDto>(projectQuery, new { @projectId = dto.ProjectId });
+                    return new Tuple<ProjectDto, List<UserDto>>(projectDetails, users);
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
             }
         }
     }

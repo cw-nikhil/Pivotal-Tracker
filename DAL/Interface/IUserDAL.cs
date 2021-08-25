@@ -20,5 +20,6 @@ namespace pivotal.DAL
         public Task<UserDto> GetUserById(int id);
         public Task<UserDto> GetUserByEmail(string email);
         public Task<int> CreateUser(UserDto user);
+        public Task<Tuple<ProjectDto, List<UserDto>>> GetUsersByProjectId(UserProjectDto dto);
     }
 }

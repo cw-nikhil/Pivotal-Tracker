@@ -57,7 +57,7 @@ namespace pivotalHeroku.Controllers
             var dbUser = await _user.GetUserByEmail(user.Email);
             if (dbUser == null || !BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
             {
-                return BadRequest(new {message = "Invalid Crdentials"});
+                return BadRequest(new { message = "Invalid Crdentials" });
             }
             Response.Cookies.Append
             (
@@ -101,6 +101,18 @@ namespace pivotalHeroku.Controllers
             string jwt = Request.Cookies[_jwtCookieName];
             var user = await _user.GetLoggedInUser(jwt);
             return Ok(user);
+        }
+
+        [HttpGet("project/{projectId}/members")]
+        public async Task<IActionResult> GetMembers(int projectId)
+        {
+            var userId = _jwt.GetUserIdByJwt(Request.Cookies[_jwtCookieName]);
+            var result = await _user.GetUsersByProjectId(new UserProjectDto
+            {
+                ProjectId = projectId,
+                LoggedInUserId = userId
+            });
+            return Ok(result);
         }
 
         //if cookie is not get by frontend add another package. Watch 45:00
