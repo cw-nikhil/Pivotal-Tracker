@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Comment from "./Comment";
 import fetchData from '../../ApiCalls';
 import { postCommentApi, getCommentsApi } from "../../ApiUrls";
+import loader from "../../Icons/loader.gif";
 
 function CommentList({ storyId }) {
   const [shouldFetch, setShouldFetch] = useState(0);
@@ -50,7 +51,11 @@ function CommentList({ storyId }) {
     );
   }
   if (!hasFetched) {
-    return <div>Loading...</div>
+    return (
+			<div className="loader">
+				<img src={loader} alt="loader" />
+			</div>
+		)
   }
 
   return (

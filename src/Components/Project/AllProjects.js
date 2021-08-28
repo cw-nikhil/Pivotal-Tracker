@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import fetchData from "../../ApiCalls";
 import { allProjectsApi } from "../../ApiUrls";
+import loader from "../../Icons/loader.gif";
 import "./css/AllProjects.css";
 
 const AllProjects = () => {
@@ -18,7 +19,11 @@ const AllProjects = () => {
   }, [])
 
   if (!hasFetched) {
-    return <div>Loading...</div>
+    return (
+			<div className="loader">
+					<img src={loader} alt="loader" />
+			</div>
+)
   }
 
   if (projects.length === 0) {

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import fetchData from '../../ApiCalls';
 import Story from "../Story/Story";
 import ProjectHeader from './ProjectHeader';
+import { getProjectApi } from '../../ApiUrls';
 import CollapsedStory from '../Story/CollapsedStory';
+import loader from "../../Icons/loader.gif";
 
 const Project = ({ id }) => {
   const [project, setProject] = useState({});
@@ -11,7 +13,7 @@ const Project = ({ id }) => {
   console.log(project);
   useEffect(() => {
     (async () => {
-      const response = await fetchData(`http://localhost:5000/api/get/project/${id}`);
+      const response = await fetchData(getProjectApi(id));
       console.log(response);
       if(response.success === 0) {
         setHasAccess(0);
@@ -24,7 +26,11 @@ const Project = ({ id }) => {
   }, [id])
 
   if (Object.keys(project).length === 0) {
-    return (<div>Loading...</div>);
+    return (
+			<div className="loader">
+				<img src={loader} alt="loader" />
+			</div>
+    )
   }
 
   if (!hasAcess) {
