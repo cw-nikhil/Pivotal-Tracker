@@ -28,7 +28,6 @@ import ProjectMembers from "./Components/Members/ProjectMembers";
 // );
 
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Route path="/" component={Header} />
       <Route path="/login/" component={Login} />
@@ -41,8 +40,7 @@ ReactDOM.render(
       <Route path="/allprojects" component={AllProjects} />
       <Route path="/add/project" component={AddProject} />
       <Route path="/project/:id/members" component={props => <ProjectMembers projectId={props.match.params.id}/>} />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById("root")
 );
 

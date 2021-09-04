@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import TaskList from "../Task/TaskList";
 import { storyState } from "../../Constants/Story";
 import StoryInfo from "./StoryInfo";
@@ -32,6 +32,10 @@ function Story(props) {
 	const [hasFetched, setHasFetched] = useState(false);
 	const icon = type === storyType.feature ? featureIcon : (type === storyType.chore ? choreIcon : bugIcon);
 
+  useEffect(() => {
+    setStory(story => ({...story, members: props.members}));
+  }, [props.members]);
+
 	if (isClicked === 0) {
 		return (
 			<div class="collapsedStory" onClick={() => setIsClicked(1)}>
@@ -44,8 +48,9 @@ function Story(props) {
 
 	if (!hasFetched) {
 		(async () => {
-			setStory(await fetchData(getStoryApi(id)));
-			setHasFetched(true);
+      var response = await fetchData(getStoryApi(id));
+      setHasFetched(true);
+			setStory({...response, members: props.members});
 		})()
 	}
 

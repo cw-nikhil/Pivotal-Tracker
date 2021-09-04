@@ -3,7 +3,7 @@ import { storyType as st } from "../../Constants/Story";
 import Select from "./Select";
 
 export default function StoryTable({
-  users,
+  members,
   type,
   points,
   requesterId,
@@ -31,14 +31,14 @@ export default function StoryTable({
         <Select
           className="requester"
           title="REQUESTER"
-          itemList={users}
-          selectedItem={requesterId}
+          itemList={members}
+          selectedItem={1}
         />
         <Select
           className="owner"
           title="OWNER"
-          itemList={users}
-          selectedItem={requesterId}
+          itemList={members}
+          selectedItem={1}
         />
       </div>
     </>

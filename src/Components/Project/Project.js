@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import fetchData from '../../ApiCalls';
 import Story from "../Story/Story";
 import ProjectHeader from './ProjectHeader';
-import { getProjectApi } from '../../ApiUrls';
+import { getProjectApi, getUsersByProjectId } from '../../ApiUrls';
 import CollapsedStory from '../Story/CollapsedStory';
 import loader from "../../Icons/loader.gif";
 
@@ -13,14 +13,20 @@ const Project = ({ id }) => {
   console.log(project);
   useEffect(() => {
     (async () => {
-      const response = await fetchData(getProjectApi(id));
-      console.log(response);
-      if(response.success === 0) {
+      const response1 = await fetchData(getProjectApi(id));
+      if(response1.success === 0) {
         setHasAccess(0);
-        setProject({project: response.project});
+        setProject({project: response1.project});
       }
       else {
-        setProject(response.project);
+        setProject(response1.project);
+        const response2 = await fetchData(getUsersByProjectId(id));
+        let members = response2.members;
+        if (!members || members.length === 0) {
+          return;
+        }
+        members = members.map(member => ({key: member.memberName, value: member.memberId}));
+        setProject(project => ({...project, members: members}));
       }
     })();
   }, [id])
@@ -40,7 +46,7 @@ const Project = ({ id }) => {
   return (
     <div>
       <ProjectHeader name={project.name} id={1} activeTab="stories"/>
-      {project.stories.map(story => <Story {...story} key = {story.id} isClicked = {0}/>)}
+      {project.stories.map(story => <Story {...story} members={project.members} key = {story.id} isClicked = {0}/>)}
     </div>
   )
 }
