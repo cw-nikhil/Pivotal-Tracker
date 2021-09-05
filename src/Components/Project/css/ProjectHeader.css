@@ -27,6 +27,7 @@
   border-right: 1px solid white;
   color: yellow;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .navigationTab:hover {

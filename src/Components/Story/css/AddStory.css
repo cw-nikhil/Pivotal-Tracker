@@ -1,3 +1,40 @@
+.addStory {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.7);
+  padding: 200px 400px;
+  z-index: 1;
+}
+
+@keyframes modal {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .addStoryContainer {
   padding: 50px;
+  background-color: hsla(86, 38%, 87%, 1);
+  animation: modal 0.6s;
+  position: relative;
+}
+
+.addStoryTitle:focus {
+  border: 1px solid rgb(157, 157, 255);
+}
+
+.modalCloseButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
 }

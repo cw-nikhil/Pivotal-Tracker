@@ -7,7 +7,9 @@ export default function StoryTable({
   type,
   points,
   requesterId,
+  ownerId,
   lastUpdated,
+  isAddStory,
 }) {
   let pointsList = [];
   for (let i = 0; i < 6; i++) {
@@ -28,17 +30,17 @@ export default function StoryTable({
           itemList={pointsList}
           selectedItem={points}
         />
-        <Select
+        {isAddStory || <Select
           className="requester"
           title="REQUESTER"
           itemList={members}
-          selectedItem={1}
-        />
+          selectedItem={requesterId}
+        />}
         <Select
           className="owner"
           title="OWNER"
           itemList={members}
-          selectedItem={1}
+          selectedItem={ownerId}
         />
       </div>
     </>

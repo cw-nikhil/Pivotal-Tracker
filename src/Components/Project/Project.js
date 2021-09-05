@@ -5,10 +5,12 @@ import ProjectHeader from './ProjectHeader';
 import { getProjectApi, getUsersByProjectId } from '../../ApiUrls';
 import CollapsedStory from '../Story/CollapsedStory';
 import loader from "../../Icons/loader.gif";
+import AddStory from '../Story/AddStory';
 
 const Project = ({ id }) => {
   const [project, setProject] = useState({});
   const [hasAcess, setHasAccess] = useState(1);
+  const [isAddStoryClicked, setIsAddStoryClicked] = useState(false);
   
   console.log(project);
   useEffect(() => {
@@ -25,7 +27,12 @@ const Project = ({ id }) => {
         if (!members || members.length === 0) {
           return;
         }
-        members = members.map(member => ({key: member.memberName, value: member.memberId}));
+        members = members.map(member => ({key: member.memberName, value: member.userId}));
+				members = [{
+					key: "None",
+					value: 0,
+				}, ...members
+				];
         setProject(project => ({...project, members: members}));
       }
     })();
@@ -45,7 +52,8 @@ const Project = ({ id }) => {
 
   return (
     <div>
-      <ProjectHeader name={project.name} id={1} activeTab="stories"/>
+      {isAddStoryClicked && <AddStory projectId={id} setIsAddStoryClicked={setIsAddStoryClicked} members={project.members}/>}
+      <ProjectHeader name={project.name} id={1} activeTab="stories" setIsAddStoryClicked={setIsAddStoryClicked}/>
       {project.stories.map(story => <Story {...story} members={project.members} key = {story.id} isClicked = {0}/>)}
     </div>
   )

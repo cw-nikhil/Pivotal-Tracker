@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import "./css/ProjectHeader.css";
 
-function ProjectHeader({ id, name, activeTab }) {
+function ProjectHeader({ id, name, activeTab, setIsAddStoryClicked }) {
   const user = { name: "Nikhil Rathore", id: 44 };
   const storiesUrl = `/project/${id}`;
   const membersUrl = `/project/${id}/members`;
@@ -12,16 +12,16 @@ function ProjectHeader({ id, name, activeTab }) {
       <div className="navigationMenu">
         <Link to={storiesUrl} className={`navigationTab${activeTab === "stories" ? " activeTab" : ""}`}>Stories</Link>
         <Link to={membersUrl} className={`navigationTab${activeTab === "members" ? " activeTab" : ""}`}>Members</Link>
-        {UserTab(id)}
+        {UserTab(id, setIsAddStoryClicked)}
       </div>
     </div>
   )
 }
 
-const UserTab = id => {
+const UserTab = (id, setIsAddStoryClicked) => {
   return (
     <div className="addstory">
-       <Link className="navigationTab" to={`/add/story/${id}`}>Add story</Link>
+       <p className="navigationTab" to={`/add/story/${id}`} onClick={() => setIsAddStoryClicked(1)}>Add story</p>
     </div>
   )
   // if (user) {

@@ -5,7 +5,7 @@ import fetchData from "../../ApiCalls";
 import { addStoryApi } from "../../ApiUrls";
 import { getUserFromCookie } from "../../Utils";
 
-export default function AddStory({ projectId }) {
+export default function AddStory({ projectId, setIsAddStoryClicked, members}) {
   if (!getUserFromCookie()) {
     return <div>You need to sign in</div>;
   }
@@ -17,7 +17,7 @@ export default function AddStory({ projectId }) {
     }
     const type = parseInt(document.querySelector(".type")?.value ?? 0);
     const points = document.querySelector(".points")?.value;
-    const ownerId = document.querySelector(".ownerId")?.value ?? 0;
+    const ownerId = document.querySelector(".owner")?.value ?? 0;
     const response = await fetchData(addStoryApi, "POST", {
       type: type,
       projectId: projectId,
@@ -35,14 +35,25 @@ export default function AddStory({ projectId }) {
       alert("error occured");
     }
   };
+  
+  const handleScreenClick = e => {
+    // const modal = document.querySelector(".addStoryContainer");
+    // if (e.target !== modal) {
+    //   setIsAddStoryClicked(false);
+    // }
+  }
+
   return (
-    <div className="addStoryContainer">
-      <textarea className="addStoryTitle" placeholder="title"></textarea>
-      <StoryTable />
-      <textarea placeholder="description"></textarea>
-      <button className="save" onClick={() => saveStory()}>
-        Add Story
-      </button>
+    <div className="addStory" onClick={e => handleScreenClick(e)}>
+      <div className="addStoryContainer">
+        <button className="modalCloseButton" onClick={() => setIsAddStoryClicked(false)}>x</button>
+        <textarea className="addStoryTitle" placeholder="title"></textarea>
+        <StoryTable members={members} isAddStory={true}/>
+        <textarea placeholder="description"></textarea>
+        <button className="save" onClick={() => saveStory()}>
+          Add Story
+        </button>
+      </div>
     </div>
   );
 }
