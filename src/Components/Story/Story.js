@@ -56,7 +56,7 @@ function Story(props) {
 
 	return (
 		<div className="storyContainer">
-			<StoryInfo {...story} setIsClicked={setIsClicked} />
+			<StoryInfo story={story} setStory={setStory} setIsClicked={setIsClicked} />
 			<CommentList storyId={id} />
 		</div>
 	)

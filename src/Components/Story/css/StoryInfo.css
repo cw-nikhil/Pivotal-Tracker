@@ -26,3 +26,30 @@
 	text-align: center;
 	background-color: rgb(187, 187, 187);
 }
+
+.stateButtonContainer {
+  margin-bottom: 8px;
+}
+
+.stateButtonContainer > button {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.start {
+  background-color: rgb(228, 202, 202)
+}
+
+.finish {
+  background-color: rgb(211, 129, 211)
+}
+
+.deliver {
+  background-color: rgb(231, 231, 18)
+}
+
+.accept {
+  background-color: rgba(16, 223, 16, 0.753);
+}

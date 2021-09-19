@@ -1,5 +1,5 @@
 import React from "react";
-import { storyType as st } from "../../Constants/Story";
+import { storyType as st, storyStates } from "../../Constants/Story";
 import Select from "./Select";
 
 export default function StoryTable({
@@ -10,6 +10,7 @@ export default function StoryTable({
   ownerId,
   lastUpdated,
   isAddStory,
+  state,
 }) {
   let pointsList = [];
   for (let i = 0; i < 6; i++) {
@@ -18,6 +19,12 @@ export default function StoryTable({
   return (
     <>
       <div>
+        <Select
+          className="state"
+          title="STATE"
+          itemList={storyStates.map(x => ({key: x.state, value: x.stateId}))}
+          selectedItem={state}
+        />
         <Select
           className="type"
           title="STORY_TYPE"
@@ -31,13 +38,13 @@ export default function StoryTable({
           selectedItem={points}
         />
         {isAddStory || <Select
-          className="requester"
+          className="requesterId"
           title="REQUESTER"
           itemList={members}
           selectedItem={requesterId}
         />}
         <Select
-          className="owner"
+          className="ownerId"
           title="OWNER"
           itemList={members}
           selectedItem={ownerId}

@@ -19,4 +19,6 @@ textarea {
 
 button {
   cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
 }

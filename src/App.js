@@ -4,7 +4,7 @@ import './App.css';
 import Just from "./Just";
 import {useState, useEffect} from "react";
 import Story from "./Components/Story/Story";
-import {storyState, storyType} from "./Constants/Story";
+import {storyStates, storyType} from "./Constants/Story";
 import AddStory from "./Components/Story/AddStory";
 // import deleteIcon from "./Icons/delete.png";
 // import choreIcon from "./Icons/chore.jpg";
@@ -64,7 +64,7 @@ function App() {
 	const props = {
 		title: "[Css Framework] - Remove remaining unnecessary usage of extra css added.",
 		id: 5346436,
-		state: storyState.finished,
+		state: storyStates.finished,
 		storyType: storyType.feature,
 		points: 2,
 		requester: "Random",

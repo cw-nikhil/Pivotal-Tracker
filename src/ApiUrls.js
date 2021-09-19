@@ -22,3 +22,4 @@ export const getCommentsApi = id => `${apiHostUrl}get/comment/${id}`;
 //story
 export const getStoryApi = id => `${apiHostUrl}get/story/${id}`;
 export const addStoryApi = `${apiHostUrl}create/story/`;
+export const updateStoryApi = `${apiHostUrl}update/story/`;

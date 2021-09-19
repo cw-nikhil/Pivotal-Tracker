@@ -1,11 +1,25 @@
-export const storyState = {
-    unstarted: 0,
-    started: 1,
-    finished: 2,
-    delievered: 3,
-    accepted: 4,
-    rejected: 5
-};
+export const storyStates = [
+  {
+    stateId: 0,
+    state: "unstarted",
+    buttonText: "Start",
+  },
+  {
+    stateId: 1,
+    state: "started",
+    buttonText: "Finish"
+  },
+  {
+    stateId: 2,
+    state: "finished",
+    buttonText: "Deliver"
+  },
+  {
+    stateId: 3,
+    state: "deliverd",
+    buttonText: "Accept"
+  },
+]
 
 export const storyType = {
     none: 0,
