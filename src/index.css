@@ -15,10 +15,28 @@ textarea {
   border-radius: 3px;
   margin: 20px 0;
   padding: 5px;
+  background-color: #fff0f0;
 }
 
 button {
   cursor: pointer;
   padding: 5px;
-  border-radius: 3px;
+  width: 90px;
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 5px;
+  font-size: 17px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: rgba(110, 144, 110, 0.308)
+}
+
+.greenButton {
+  background-color: rgb(25, 241, 25);
+}
+
+.redBorder {
+  border-color: red;
 }

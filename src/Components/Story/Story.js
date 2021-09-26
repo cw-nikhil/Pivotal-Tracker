@@ -23,10 +23,6 @@ function Story(props) {
 		title,
 		points,
 		type,
-		state,
-		ownerId,
-		comments,
-		tasks,
 	} = story;
 	const [isClicked, setIsClicked] = useState(props.isClicked);
 	const [hasFetched, setHasFetched] = useState(false);

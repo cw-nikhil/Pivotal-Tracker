@@ -105,12 +105,8 @@ span {
 
 .delete {
 	background-color: red;
-	width: 90px;
-	height: 30px;
-	border: 1px solid black;
-	border-radius: 5px;
 	color: white;
-	cursor: pointer;
+  margin-right: 2px;
 }
 
 .save {

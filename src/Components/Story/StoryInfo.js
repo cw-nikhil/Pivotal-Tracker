@@ -4,6 +4,7 @@ import StoryTable from "./StoryTable";
 import { storyStates } from '../../Constants/Story';
 import fetchData from '../../ApiCalls';
 import { updateStoryApi } from '../../ApiUrls';
+import TextArea from '../TextArea/TextArea';
 import "./css/StoryInfo.css";
 
 let setTaskList;
@@ -38,6 +39,14 @@ function StoryInfo(props) {
     fetchData(updateStoryApi, "PUT", {...unchangedValues, state: story.state + 1});
     setStory(story => ({...story, state: story.state + 1}))
   }
+
+  const handleTextOrDescriptionChange = (changedParam) => {
+    fetchData(updateStoryApi, "PUT", {
+      ...unchangedValues,
+      ...changedParam
+    });
+    setStory(story => ({...story, ...changedParam}));
+  }
   
 	let {
 		id,
@@ -50,7 +59,7 @@ function StoryInfo(props) {
 
 	return (
 		<>
-			<textarea className="storyTitle">{title}</textarea>
+      <TextArea text={title} charLimit={100} index={0} onSubmitClick={(title) => handleTextOrDescriptionChange({title})}/>
 			<div className="storyInfo">
 				<div className="firstRow">
 					<div className="first">
@@ -76,8 +85,8 @@ function StoryInfo(props) {
 					  <StoryTable {...story}/>
           </handlerContext.Provider>
 				</div>
-				<textarea className="storyDescription">{description}</textarea>
 			</div>
+      <TextArea text={description} charLimit={100} onSubmitClick={(description) => handleTextOrDescriptionChange({description})} index={1}/>
 		</>
 	)
 }
