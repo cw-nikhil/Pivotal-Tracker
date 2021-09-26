@@ -1,0 +1,33 @@
+.textareaContainer {
+  margin: 8px 0;
+}
+
+textarea {
+  margin: 0;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+textarea:focus {
+  border: 2px solid rgb(29, 172, 255);
+}
+
+.textareaBottom {
+  display: flex;
+  justify-content: space-between;
+  visibility: hidden;
+}
+
+.textareaBottom > span {
+  border: none;
+  padding: 0 4px 0;
+}
+
+.boxStyles {
+  border: 1px solid black;
+  padding: 12px;
+  font-size: 20px;
+  cursor: text;
+  height: 48px;
+}
+
