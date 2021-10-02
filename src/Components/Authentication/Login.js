@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { login } from "../../ApiCalls";
 import { Link } from "react-router-dom";
+import "./css/Login.css";
 
 const Login = () => {
 	const [message, setMessage] = useState("");
@@ -20,15 +21,21 @@ const Login = () => {
 		}
 	}
 	return (
-		<>
-			{message && <p>{message}</p>}
-			<input type="text" placeholder="Enter your email" id="email"></input>
-			<p>Email Address</p>
-			<input type="password" placeholder="Enter your password" id="password"></input>
-			<p>Password</p>
-			<button onClick={() => handleLogin()}>Login</button>
-			<Link to="/signup/">Signup</Link>
-		</>
+		<div class="container">
+            <div>
+                {message && <p>{message}</p>}
+                <p class="loginHeading">Enter your credentials</p>
+
+                <p>Email Address</p>
+                <input type="text" placeholder="Enter your email" id="email"></input>
+
+                <p>Password</p>
+                <input type="password" placeholder="Enter your password" id="password"></input>
+
+                <button onClick={() => handleLogin()}>Login</button>
+                <p>New here? <Link to="/signup/">Signup</Link></p>
+            </div>
+		</div>
 	)
 }
 export default Login
