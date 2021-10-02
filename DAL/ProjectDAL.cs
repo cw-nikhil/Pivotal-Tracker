@@ -37,8 +37,8 @@ namespace pivotal.DAL
             {
                 using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
                 {
-                    var storyList = new List<StoryDto>();
-                    var projectList = await con.QueryAsync<StoryDto, ProjectDto, ProjectDto>
+                    var storyList = new List<StoryListingDto>();
+                    var projectList = await con.QueryAsync<StoryListingDto, ProjectDto, ProjectDto>
                     (
                         sql,
                         map: (story, project) =>

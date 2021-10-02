@@ -8,7 +8,7 @@ namespace pivotal.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsPublic { get; set; }
-        public List<StoryDto> Stories { get; } = new List<StoryDto>();
+        public List<StoryListingDto> Stories { get; } = new List<StoryListingDto>();
         public int StoryCount { get; set; }
         public int OwnerId { get; set; }
     }
