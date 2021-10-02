@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import deleteIcon from "../../Icons/delete.png";
 import featureIcon from "../../Icons/feature.jpg";
+import "./css/SavedTask.css";
 
 export default function SavedTask(props) {
     const [isEditMode, setIsEditMode] = useState(0);
     const [desc, setDesc] = useState(props.desc);
     const [isDeleted, setIsDeleted] = useState(0);
     const [isChecked, setIsChecked] = useState(props.isChecked);
-    const isTaskHovered = 4;
-    const setIsTaskHovered = () => {};
+    const [isTaskHovered, setIsTaskHovered] = useState(false);
+
+    useEffect(() => {
+      const el = document.querySelector("textarea.inputTask");
+      if (el) {
+        el.setSelectionRange(desc.length, desc.length);
+      }
+    })
 
     const save = () => {
         console.log("save");
@@ -22,6 +29,10 @@ export default function SavedTask(props) {
         if (cn !== "saveTask" && cn !== "checkbox") {
             setIsEditMode(0);
         }
+    };
+
+    const deleteTask = () => {
+      setIsDeleted(true);
     }
 
     if (isDeleted) {
@@ -29,12 +40,11 @@ export default function SavedTask(props) {
     }
     if (isEditMode) {
         return (
-            <div className = "taskContainer" onBlur = {e => onBlur(e)}>
+            <div className = "taskContainer">
                 <input type = "checkbox" className = "checkBox" disabled = "true"/>
                 <textarea className = "inputTask" autoFocus>{desc}</textarea>
-                <div style = {{flexGrow: "3", display: "flex", flexBasis: "0"}}>
-                    <button className = "saveTask" onClick = {() => save()}>Save1</button>
-                </div>
+                <button className = "cancelTask" onClick = {() => setIsEditMode(0)}>Cancel</button>
+                <button className = "saveTask" onClick = {() => save()}>Save</button>
             </div>
         )
     }
@@ -42,9 +52,7 @@ export default function SavedTask(props) {
         <div className = "taskContainer" onMouseEnter = {() => setIsTaskHovered(true)} onMouseLeave = {() => setIsTaskHovered(false)}>
             <input type = "checkbox" className = "checkBox" checked = {isChecked} onChange = {() => setIsChecked(!isChecked)}/>
             <p className = "taskDescription" onClick = {() => setIsEditMode(1)}>{desc}</p>
-            <div className = "buttons">
-                {isTaskHovered && <button onClick = {() => setIsDeleted(true)}>Delete</button>}
-            </div>
+            {isTaskHovered && <img src={deleteIcon} alt="delete" className="icon" title="delete" onClick={() => deleteTask()}/>}
         </div>
     )
 }
