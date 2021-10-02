@@ -2,7 +2,7 @@
   display: flex;
   padding: 12px;
   background-color: rgb(255, 245, 245);
-  cursor: text;
+  cursor: all-scroll;
 }
 
 .taskContainer:hover {

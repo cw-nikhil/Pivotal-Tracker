@@ -1,22 +1,51 @@
-import React from 'react';
+import React from "react";
 import SavedTask from "./SavedTask";
-import AddTask from "./AddTask";
-import {useState} from "react";
+import { useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-export default function TaskList(props) {
-    const [taskList, setTaskList] = useState(props.taskList);
-    const addTask = desc => {
-        const newTask = {
-            id: taskList.length,
-            isChecked: false,
-            desc: desc,
-        };
-        setTaskList([...taskList, newTask]);
-    }
-    return (
-        <div>
-            {taskList.map(task => <SavedTask {...task}/>)}
-            <AddTask addTask = {addTask}/>
-        </div>
-    )
+function TaskList(props) {
+  const [taskList, setTaskList] = useState(props.taskList);
+
+  function handleOnDragEnd(result) {
+		console.log(result);
+    if (!result.destination) return;
+
+    const items = Array.from(taskList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setTaskList(items);
+  }
+
+  return (
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <Droppable droppableId="taskList">
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {taskList.map((task, index) => {
+              const id = task.id.toString();
+              return (
+                <Draggable key={id} draggableId={id} index={index}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <SavedTask {...task} />
+                    </div>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
 }
+
+export default TaskList;
