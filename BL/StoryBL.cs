@@ -36,7 +36,42 @@ namespace pivotal.BL
         }
         public async Task<bool> UpdateStory(StoryDto story)
         {
-            return await _story.UpdateStory(story);
+			var setQueryList = new List<string>();
+            if (!string.IsNullOrEmpty(story.Title))
+            {
+                setQueryList.Add("title = @title");
+            }
+            if (!string.IsNullOrEmpty(story.Description))
+            {
+                setQueryList.Add("description = @description");
+            }
+			if ((int) story.State != -1)
+			{
+				setQueryList.Add("state = @state");
+			}
+			if ((int) story.Type != -1)
+			{
+				setQueryList.Add("type = @type");
+			}
+			if (story.Points != -1)
+			{
+				setQueryList.Add("points = @points");
+			}
+            if (story.OwnerId != -1)
+            {
+                setQueryList.Add("ownerId = @ownerId");
+            }
+            if (story.RequesterId != -1)
+            {
+                setQueryList.Add("requesterId = @requesterId");
+            }
+            if (setQueryList.Count == 0)
+            {
+                return true;
+            }
+            var a = string.Join(", ", setQueryList);
+            string query = "UPDATE {0}.Story SET {1} WHERE id = @id;";
+            return await _story.UpdateStory(story, query, string.Join(", ", setQueryList));
         }
     }
 }

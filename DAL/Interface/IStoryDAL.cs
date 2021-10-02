@@ -20,6 +20,6 @@ namespace pivotal.DAL
         public Task<StoryDto> GetStoryById(int id);
         public Task<int> AddStory(StoryDto story);
         public Task<bool> DeleteStory(int storyId);
-        public Task<bool> UpdateStory(StoryDto story);
+        public Task<bool> UpdateStory(StoryDto story, string query, string setClause);
     }
 }

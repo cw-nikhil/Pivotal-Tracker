@@ -47,7 +47,7 @@ namespace pivotalHeroku.Controllers
             {
                 return Ok(new {message = "Story title can't be null"});
             }
-            story.RquesterId = userId;
+            story.RequesterId = userId;
             int id = await _story.AddStory(story);
             if (id == 0) {
                 return Ok(new {message = "some error creating story"}); 

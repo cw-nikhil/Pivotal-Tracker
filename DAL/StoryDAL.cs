@@ -57,7 +57,7 @@ namespace pivotal.DAL
                             @title = story.Title,
                             @description = story.Description,
                             @ownerId = story.OwnerId,
-                            @requesterId = story.RquesterId,
+                            @requesterId = story.RequesterId,
                             @points = story.Points,
                             @type = (int)story.Type,
                             @state = (int)story.State,
@@ -87,44 +87,25 @@ namespace pivotal.DAL
                 return false;
             }
         }
-        public async Task<bool> UpdateStory(StoryDto story)
+        public async Task<bool> UpdateStory(StoryDto story, string query, string setClause)
         {
-            var setQueryList = new List<string>();
-            if (!string.IsNullOrEmpty(story.Title))
-            {
-                setQueryList.Add("title = @title");
-            }
-            if (!string.IsNullOrEmpty(story.Description))
-            {
-                setQueryList.Add("description = @description");
-            }
-            if (story.OwnerId != 0)
-            {
-                setQueryList.Add("ownerId = @ownerId");
-            }
-            if (story.RquesterId != 0)
-            {
-                setQueryList.Add("requesterId = @requesterId");
-            }
-            if (setQueryList.Count == 0)
-            {
-                return true;
-            }
-            var a = string.Join(", ", setQueryList);
-            string sql = $@"UPDATE {_options.Value.Schema}.Story SET {string.Join(", ", setQueryList)} WHERE id = @id;";
             try
             {
+				query = string.Format(query, _options.Value.Schema, setClause);
                 using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
                 {
                     int result = await con.ExecuteAsync(
-                        sql,
+                        query,
                         new
                         {
                             @id = story.Id,
+							@state = (int) story.State,
+							@type = (int) story.Type,
+							@points = story.Points,
                             @title = story.Title,
                             @description = story.Description,
                             @ownerId = story.OwnerId,
-                            @requesterId = story.RquesterId
+                            @requesterId = story.RequesterId
                         }
                     );
                     return result > 0;

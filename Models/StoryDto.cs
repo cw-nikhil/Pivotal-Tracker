@@ -11,7 +11,7 @@ namespace pivotal.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int OwnerId { get; set; }
-        public int RquesterId { get; set; }
+        public int RequesterId { get; set; }
         public int Points { get; set; }
         public StoryType Type { get; set; }
         public StoryState State { get; set; }
