@@ -27,10 +27,6 @@ CREATE TABLE `pivotal`.`Story` (
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Id_UNIQUE` (`Id` ASC));
 
-  CREATE TABLE `pivotal`.`UserProjectMapping` (
-  `projectId` INT NOT NULL,
-  `userId` INT NOT NULL);
-
 CREATE TABLE `pivotal`.`UserProjectMapping` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `projectId` INT NOT NULL,
