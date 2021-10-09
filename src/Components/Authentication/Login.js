@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { login } from "../../ApiCalls";
+import fetchData from "../../ApiCalls";
 import { Link } from "react-router-dom";
 import "./css/Login.css";
+import { loginUrl } from '../../ApiUrls';
 
 const Login = () => {
 	const [message, setMessage] = useState("");
@@ -12,7 +13,10 @@ const Login = () => {
 			setMessage("Both email and password are required");
 		}
 		else {
-			const result = await login(email, password);
+			const result = await fetchData(loginUrl, "POST", {
+                email,
+                password
+            });
 			console.log(result);
 			if (result.message === "success") {
 				console.log(result);

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { signup } from "../../ApiCalls";
+import fetchData from "../../ApiCalls";
 import { Link } from "react-router-dom";
 import "./css/Login.css";
+import { signupUrl } from "../../ApiUrls";
 
 const Signup = (id) => {
   console.log(id);
@@ -13,7 +14,11 @@ const Signup = (id) => {
     if (!name || !email || !password) {
       setMessage("All fields are required");
     } else {
-      const result = await signup(name, email, password);
+      const result = await fetchData(signupUrl, "POST", {
+          name,
+          email,
+          password,
+      });
       setMessage(result.message);
     }
   };
