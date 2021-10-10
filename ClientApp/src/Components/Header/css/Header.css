@@ -1,0 +1,41 @@
+.header {
+  background-color: #256188;
+  padding: 20px;
+}
+
+.projectName {
+  color: white;
+  font-size: 30px;
+  font-family: monospace;
+  margin-bottom: 15px;
+}
+
+.headerNavigationMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.activeTab {
+  color: yellow
+}
+
+.navigationTab {
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 5px 20px;
+  border-right: 1px solid white;
+  color: yellow;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navigationTab:hover {
+  color: rgb(19, 19, 16);
+  background-color: hsla(0, 0%, 96%, 0.842);
+}
+
+.addstory {
+  position: absolute;
+  right: 10px;
+}

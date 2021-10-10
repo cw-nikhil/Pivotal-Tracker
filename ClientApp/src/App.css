@@ -1,0 +1,145 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+textarea {
+	flex-grow: 20;
+	flex-basis: 0;
+}
+
+.saveTaskDiv {
+	flex-basis: 0;
+	flex-grow: 3;
+	display: "flex";
+}
+
+/* style = {{flexGrow: 3, display: "flex", flexBasis: 0}} */
+
+
+button {
+	flex-basis: 0;
+	flex-grow: 1;
+	color: blue;
+}
+
+/* .inputTask {
+	flex-basis: 0;
+	flex-grow: 20;
+	padding-top: 10px;
+	height: 100%;
+} */
+
+.just {
+	background-color: yellow;
+	height: 50px;
+	text-align: center;
+}
+
+span {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+/* .first {
+	margin-right: 50px;
+} */
+
+.collapse {
+	background-color: yellow;
+	width: 90px;
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 5px;
+	color: black;
+	cursor: pointer;
+}
+
+.delete {
+	background-color: red;
+	color: white;
+  margin-right: 2px;
+}
+
+.save {
+	background-color: rgb(207, 196, 38);
+	width: 90px;
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 5px;
+	color: white;
+	cursor: pointer;
+}
+
+.select {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	/* margin-left: 10px; */
+}
+
+
+option {
+	background-color: yellow;
+	font-size: 20px;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}	
+
+.abs {
+	width: 100%;
+	background-color: yellow;
+}
+
+.lastUpdated {
+	text-align: center;
+	font-size: 18px;
+	justify-content: center;
+}
+
+.blocker {
+	display: flex;
+	flex-direction: row;
+	width : 100%;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.blockerText {
+	width: 90%;
+	background-color: cyan;
+	align-items: center;
+	padding: 10px;
+}
+
+.blockerText:hover {
+	background-color: #bbb;
+}
+
+.inputBlocker {
+	width: 100%;
+	padding: 5px;
+}
+
+.blockerButtons {
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+.addBlocker {
+	background-color: chartreuse;
+	height: 40px;
+	width: 100%;
+	cursor: pointer;
+}
+
+
+/* style = {{backgroundColor: col[i], height: "50px", textAlign: "center"}} */

@@ -1,0 +1,48 @@
+.loader {
+    text-align: center;
+}
+.loader > img {
+    margin: auto;
+    height: 200px;
+    width: 200px;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 20px 0;
+  padding: 5px;
+  background-color: #fff0f0;
+}
+
+button {
+  cursor: pointer;
+  padding: 5px;
+  width: 90px;
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 5px;
+  font-size: 17px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: rgba(110, 144, 110, 0.308)
+}
+
+.greenButton {
+  background-color: rgb(25, 241, 25);
+}
+
+.redBorder {
+  border-color: red;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}

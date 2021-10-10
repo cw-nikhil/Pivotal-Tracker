@@ -1,0 +1,52 @@
+.taskContainer {
+  display: flex;
+  padding: 12px;
+  background-color: rgb(255, 245, 245);
+  cursor: all-scroll;
+}
+
+.taskContainer:hover {
+  background-color: rgb(241, 229, 229);
+}
+
+.checkBox {
+  height: 20px;
+  width: 20px;
+  margin-right: 8px;
+}
+
+.taskDescription {
+  width: 100%;
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.taskContainer > img {
+  margin: 0;
+}
+
+.inputTask {
+    padding: 0;
+    margin: 0;
+    height: auto;
+}
+
+.saveTask {
+	height: 40px;
+    color: rgba(0, 128, 0, 0.698);
+}
+
+.saveTask:hover {
+    background-color: green;
+    color: white
+}
+
+.cancelTask {
+    height: 40px;
+    color: red;
+}
+
+.cancelTask:hover {
+    background-color: red;
+    color: white;
+}
