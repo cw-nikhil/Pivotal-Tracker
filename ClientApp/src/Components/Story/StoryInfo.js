@@ -1,10 +1,11 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useEffect, createContext, useContext } from 'react';
 import TaskList from "../Task/TaskList";
 import StoryTable from "./StoryTable";
-import { storyStates } from '../../Constants/Story';
+import { storyStateOb, storyStates } from '../../Constants/Story';
 import fetchData from '../../ApiCalls';
 import { updateStoryApi } from '../../ApiUrls';
 import TextArea from '../TextArea/TextArea';
+import { toggleContext } from '../Project/Project';
 import "./css/StoryInfo.css";
 
 let setTaskList;
@@ -12,6 +13,7 @@ export const handlerContext = createContext();
 
 function StoryInfo(props) {
   const { story, setStory, setIsClicked } = props;
+  const toggleState = useContext(toggleContext);
 	const deleteStory = () => {
 		alert("Are you sure you want to delete this story");
 	}
@@ -29,14 +31,25 @@ function StoryInfo(props) {
 
   const handleTableValueChange = selectClass => {
     const value = parseInt(document.querySelector(`.${selectClass}`).value);
+    if (story[selectClass] === value) {
+        console.log("same");
+        return;
+    }
     let changedParam = {}
     changedParam[selectClass] = value;
     fetchData(updateStoryApi, "PUT", {...unchangedValues, ...changedParam});
-    setStory({...story, ...changedParam});
+    if (selectClass === "state" && (story.state === storyStateOb.accepted || value === storyStateOb.accepted)) {
+        console.log("kjlkdfjsdlkfjlsdjfksdjf");
+        toggleState(story.id, value);
+    }
+	setStory({...story, ...changedParam});
   }
 
   const handleStateButtonClick = () => {
     fetchData(updateStoryApi, "PUT", {...unchangedValues, state: story.state + 1});
+    if (story.state + 1 === storyStateOb.accepted) {
+      toggleState(story.id, storyStateOb.accepted);
+    }
     setStory(story => ({...story, state: story.state + 1}))
   }
 
@@ -72,14 +85,14 @@ function StoryInfo(props) {
 						<button className="collapse" title="collapse this story" onClick={() => setIsClicked(0)}>Collapse</button>
 					</div>
 				</div>
-        <div className="stateButtonContainer">
+        {story.state !== storyStateOb.accepted && <div className="stateButtonContainer">
           <button
             className={stateOb.buttonText.toLowerCase()}
             onClick={() => handleStateButtonClick()}
           >
             {stateOb.buttonText}
           </button>
-        </div>
+        </div>}
 				<div className="storyTable">
           <handlerContext.Provider value={handleTableValueChange}>
 					  <StoryTable {...story}/>

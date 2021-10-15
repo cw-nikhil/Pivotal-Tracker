@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./css/TextArea.css";
 
-const TextArea = ({ text = "", charLimit, onSubmitClick, index }) => {
+const TextArea = ({ text, charLimit, onSubmitClick, index }) => {
+  text = text || "";
   useEffect(() => {
     setCharsRemaining(charLimit - text.length);
   }, [text]);

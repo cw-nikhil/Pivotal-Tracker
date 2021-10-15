@@ -19,7 +19,19 @@ export const storyStates = [
     state: "deliverd",
     buttonText: "Accept"
   },
+  {
+    stateId: 4,
+    state: "accepted",
+  }
 ]
+
+export const storyStateOb = {
+  unstarted: 0,
+  started: 1,
+  finished: 2,
+  deliverd: 3,
+  accepted: 4,
+};
 
 export const storyType = {
     none: 0,
