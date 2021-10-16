@@ -17,15 +17,6 @@
 	margin-bottom: 10px;
 }
 
-.storyTitle {
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	margin: 8px auto;
-	font-size: 20px;
-	background-color: rgb(187, 187, 187);
-}
-
 .storyDescription {
 	width: 100%;
 	height: 50px;
@@ -40,10 +31,10 @@
 }
 
 .stateButtonContainer > button {
-  /* padding: 10px; */
   border: 1px solid black;
   border-radius: 3px;
   font-size: 16px;
+  height: 40px;
 }
 
 .start {
@@ -51,7 +42,8 @@
 }
 
 .finish {
-  background-color: rgb(211, 129, 211)
+  background-color: rgb(211, 129, 211);
+  color: white;
 }
 
 .deliver {

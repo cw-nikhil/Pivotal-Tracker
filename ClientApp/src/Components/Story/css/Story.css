@@ -1,14 +1,47 @@
 .collapsedStory {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	cursor: pointer;
 	border: 1px solid black;
-	background-color: coral;
+  padding: 12px;
+  background-color: rgb(240, 228, 228);
 }
 
-.storyContainer {
+.collapsedStory:hover {
+  background-color: rgb(199, 199, 199);
+}
+
+.acceptedStory {
+  background-color: rgb(145, 241, 145);
+}
+
+.acceptedStory:hover {
+  background-color: rgb(118, 216, 118);
+}
+
+.collapsedStory > div.leftCol {
+  display: flex;
+}
+
+.collapsedStory hr {
+  width: 10px;
+  margin-bottom: 1px;
+  margin-right: 12px;
+}
+
+.collapsedStory > .storyTitle {
+	width: 100%;
+	/* min-height: 32px; */
+	font-size: 20px;
+  margin-right: 12px;
+}
+
+/* .collapsedStory > .points {
+  display: ;
+} */
+
+/* .storyContainer {
 	padding: 32px 16px;
 	background-color: rgb(241, 213, 213);
 }
@@ -21,4 +54,4 @@
 
 .spans {
 	cursor: pointer;
-}
+} */

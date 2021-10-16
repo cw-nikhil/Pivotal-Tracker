@@ -3,13 +3,28 @@ import fetchData from "../../ApiCalls";
 import Story from "../Story/Story";
 import ProjectHeader from "./ProjectHeader";
 import { getProjectApi, getUsersByProjectId } from "../../ApiUrls";
-import CollapsedStory from "../Story/CollapsedStory";
 import loader from "../../Icons/loader.gif";
 import AddStory from "../Story/AddStory";
 import { storyStateOb, storyStates } from "../../Constants/Story";
 import "./css/Project.css";
 
 export const toggleContext = createContext();
+
+const ArrowSvg = ({dirClass}) => {
+  return (
+    <svg
+      class={`arrowSvg ${dirClass}`}
+      viewBox="0 0 16 16"
+      fill="currentcolor"
+      tabindex="-1"
+      focusable="false"
+      aria-hidden="true"
+      role="img"
+    >
+      <path d="M4.59 15.8a1 1 0 01-.69-.29 1 1 0 010-1.37L10 8 3.9 1.86a1 1 0 010-1.37 1 1 0 011.38 0l6.82 6.82a1 1 0 010 1.38l-6.82 6.82a1 1 0 01-.69.29z"></path>
+    </svg>
+  );
+};
 
 const Project = ({ id }) => {
   const [project, setProject] = useState({});
@@ -92,9 +107,12 @@ const Project = ({ id }) => {
       <toggleContext.Provider value={toggleState}>
         {acceptedStories && acceptedStories.length > 0 && (
           <div className="acceptedStories">
-            <p onClick={() => setShouldShowAccepted(!shouldShowAccepted)}>{`${
-              shouldShowAccepted ? "Hide" : "Show"
-            } ${acceptedStories.length} accepted stories`}</p>
+            <p onClick={() => setShouldShowAccepted(!shouldShowAccepted)}>
+              {`${shouldShowAccepted ? "Hide" : "Show"} ${
+                acceptedStories.length
+              } accepted ${acceptedStories.length > 1 ? "stories" : "story"}`}
+              <ArrowSvg dirClass={shouldShowAccepted ? "up": "down"}/>
+            </p>
             {shouldShowAccepted && (
               <div>
                 {acceptedStories.map((story) => (
