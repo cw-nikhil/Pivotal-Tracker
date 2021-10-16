@@ -1,0 +1,7 @@
+button.loadComments {
+  width: auto;
+}
+
+button.loadComments:hover {
+  background-color: wheat;
+}

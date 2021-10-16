@@ -3,6 +3,7 @@ import Comment from "./Comment";
 import fetchData from '../../ApiCalls';
 import { postCommentApi, getCommentsApi } from "../../ApiUrls";
 import loader from "../../Icons/loader.gif";
+import "./css/CommentList.css";
 
 function CommentList({ storyId }) {
   const [shouldFetch, setShouldFetch] = useState(0);
@@ -43,19 +44,12 @@ function CommentList({ storyId }) {
       alert("Some error submitting your comment. please try again");
     }
   }
-  if (!shouldFetch) {
+  if (!shouldFetch || !hasFetched) {
     return (
-      <button onClick={() => fetchComments()}>
-        Load Comments
+      <button onClick={() => fetchComments()} className="loadComments">
+        {!shouldFetch ? "Load Comments" : "Loading..."}
       </button>
     );
-  }
-  if (!hasFetched) {
-    return (
-			<div className="loader">
-				<img src={loader} alt="loader" />
-			</div>
-		)
   }
 
   return (
