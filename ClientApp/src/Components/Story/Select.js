@@ -14,9 +14,13 @@ export default function Select({
     selectElement.value = selectedItem;
   }
   return (
-    <div className="select" onClick={() => changeHandler(className)}>
+    <div className="select">
       <span className="selectTitle">{title}</span>
-      <select className={className} defaultValue={selectedItem}>
+      <select
+        className={className}
+        defaultValue={selectedItem}
+        onClick={() => changeHandler(className)}
+      >
         {itemList.map(({ key, value }) => (
           <option value={value}>{key}</option>
         ))}
