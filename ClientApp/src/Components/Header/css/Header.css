@@ -1,6 +1,9 @@
 .header {
   background-color: #256188;
   padding: 20px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
 }
 
 .projectName {
