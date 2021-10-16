@@ -37,10 +37,7 @@ export default function AddStory({ projectId, setIsAddStoryClicked, members}) {
   };
   
   const handleScreenClick = e => {
-    // const modal = document.querySelector(".addStoryContainer");
-    // if (e.target !== modal) {
-    //   setIsAddStoryClicked(false);
-    // }
+    e.target.classList[0] === "addStory" && setIsAddStoryClicked(false);
   }
 
   return (
