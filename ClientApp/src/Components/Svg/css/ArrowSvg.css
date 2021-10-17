@@ -3,7 +3,7 @@ svg.arrowSvg {
   height: 12px;
   position: absolute;
   right: 12px;
-  transition: transform 0.7s;
+  transition: all 0.7s;
 }
 
 svg.down {

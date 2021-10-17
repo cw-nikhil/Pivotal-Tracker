@@ -30,7 +30,7 @@ const AllProjects = () => {
     return (
       <>
         <h1>Sorry seems like you don't access to any project</h1>
-        <h2>Create a new project <Link to="/addproject">here</Link></h2>
+        <h2>Create a new project <Link to="/add/project">here</Link></h2>
       </>
     )
 

@@ -1,0 +1,71 @@
+.addProjectContainer {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(65, 12, 134, 0.123);
+  padding: 100px 300px;
+}
+
+.addProjectContainer .radioButtons p {
+  padding: 32px;
+  margin: 16px 16px 16px 0;
+  background-color: rgb(241, 241, 241);
+  cursor: pointer;
+  font-size: 25px;
+  line-height: 25px;
+  margin-bottom: 12px;
+  font-family: monospace;
+  transition: background-color 0.5s;
+}
+
+.addProjectContainer .radioButtons > p:nth-child(1) {
+  border: 2px solid purple;
+}
+
+.addProjectContainer .radioButtons p:hover {
+  background-color: rgb(143, 109, 109);
+  color: white;
+}
+
+.addProjectContainer .radioButtons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.addProjectContainer .text {
+  font-size: 35px;
+  font-weight: 400;
+  margin: 32px 0 16px;
+}
+
+.addProjectContainer .submit {
+  width: 200px;
+  border: 1px solid black;
+  position: relative;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+}
+
+.addProjectContainer .submit:hover {
+  box-shadow: 0 0 5px 2px rgb(194, 120, 120);
+}
+
+.addProjectContainer .submit:hover > svg {
+  right: 6px;
+}
+
+.addProjectContainer .submitDisable {
+  cursor: not-allowed;
+}
+
+.addProjectContainer .message {
+  font-size: 30px;
+  color: green;
+  position: absolute;
+  top: 30px;
+  left: 700px;
+}

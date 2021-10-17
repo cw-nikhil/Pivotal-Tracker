@@ -18,7 +18,7 @@ function Header({ activeTab }) {
   // const yourProjects = `/project/${id}`;
   // const membersUrl = `/project/${id}/members`;
   const allProjectsUrl = `/allprojects/`;
-  const addProject = `/addproject`;
+  const addProject = `/add/project`;
   return (
     <div className="header">
       <div className="headerNavigationMenu">

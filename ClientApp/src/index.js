@@ -36,7 +36,7 @@ ReactDOM.render(
         path="/add/Story/:id"
         component={(props) => <AddStory projectId={props.match.params.id} />}
       />
-      <Route path="/project/:id" exact component={(id) => <Project id={1} />} />
+      <Route path="/project/:id" exact component={props => <Project id={props.match.params.id} />} />
       <Route path="/allprojects" component={AllProjects} />
       <Route path="/add/project" component={AddProject} />
       <Route path="/project/:id/members" component={props => <ProjectMembers projectId={props.match.params.id}/>} />
