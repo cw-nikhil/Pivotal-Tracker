@@ -84,7 +84,7 @@ const Project = ({ id }) => {
       )}
       <ProjectHeader
         name={project.name}
-        id={1}
+        id={project.id}
         activeTab="stories"
         setIsAddStoryClicked={setIsAddStoryClicked}
       />

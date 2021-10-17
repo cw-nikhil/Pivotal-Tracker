@@ -1,4 +1,4 @@
-const apiHostUrl = "http://localhost:5000/api/";
+const apiHostUrl = "/api/";
 
 //user
 export const logoutUrl = `${apiHostUrl}logout`;
