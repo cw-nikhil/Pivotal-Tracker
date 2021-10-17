@@ -72,7 +72,7 @@ function StoryInfo(props) {
 
 	return (
 		<>
-      <TextArea text={title} charLimit={100} index={0} onSubmitClick={(title) => handleTextOrDescriptionChange({title})}/>
+      <TextArea text={title} charLimit={100} index={0} onSubmitClick={(title) => handleTextOrDescriptionChange({title})} shouldShowActionButtons={true}/>
 			<div className="storyInfo">
 				<div className="firstRow">
 					<div className="first">
@@ -99,7 +99,7 @@ function StoryInfo(props) {
           </handlerContext.Provider>
 				</div>
 			</div>
-      <TextArea text={description} charLimit={100} onSubmitClick={(description) => handleTextOrDescriptionChange({description})} index={1}/>
+      <TextArea text={description} charLimit={100} onSubmitClick={(description) => handleTextOrDescriptionChange({description})} index={1} shouldShowActionButtons={true}/>
 		</>
 	)
 }
