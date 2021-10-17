@@ -6,32 +6,16 @@ import { getProjectApi, getUsersByProjectId } from "../../ApiUrls";
 import loader from "../../Icons/loader.gif";
 import AddStory from "../Story/AddStory";
 import { storyStateOb, storyStates } from "../../Constants/Story";
+import { ArrowSvg } from "../Svg/ArrowSvg";
 import "./css/Project.css";
 
 export const toggleContext = createContext();
-
-const ArrowSvg = ({dirClass}) => {
-  return (
-    <svg
-      class={`arrowSvg ${dirClass}`}
-      viewBox="0 0 16 16"
-      fill="currentcolor"
-      tabindex="-1"
-      focusable="false"
-      aria-hidden="true"
-      role="img"
-    >
-      <path d="M4.59 15.8a1 1 0 01-.69-.29 1 1 0 010-1.37L10 8 3.9 1.86a1 1 0 010-1.37 1 1 0 011.38 0l6.82 6.82a1 1 0 010 1.38l-6.82 6.82a1 1 0 01-.69.29z"></path>
-    </svg>
-  );
-};
 
 const Project = ({ id }) => {
   const [project, setProject] = useState({});
   const [hasAcess, setHasAccess] = useState(1);
   const [isAddStoryClicked, setIsAddStoryClicked] = useState(false);
   const [shouldShowAccepted, setShouldShowAccepted] = useState(false);
-  const storyDict = {};
   console.log(project);
   useEffect(() => {
     (async () => {
