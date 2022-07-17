@@ -98,8 +98,13 @@ namespace pivotal.DAL
                 string projectQuery = $@"SELECT IsPublic, OwnerId FROM {_options.Value.Schema}.Project WHERE id = @projectId LIMIT 1";
                 using (IDbConnection con = new MySqlConnection(_options.Value.ConnectionString))
                 {
-                    List<UserDto> users = (await con.QueryAsync<UserDto>(usersQuery, new { @projectId = dto.ProjectId })).ToList();
-                    ProjectDto projectDetails = await con.QueryFirstOrDefaultAsync<ProjectDto>(projectQuery, new { @projectId = dto.ProjectId });
+                    Task<ProjectDto> t1 = con.QueryFirstOrDefaultAsync<ProjectDto>(projectQuery, new { @projectId = dto.ProjectId });
+                    Task<IEnumerable<UserDto>> t2 = con.QueryAsync<UserDto>(usersQuery, new { @projectId = dto.ProjectId });
+
+                    await Task.WhenAll(t1, t2);
+
+                    ProjectDto projectDetails = await t1;
+                    List<UserDto> users = (await t2).ToList();
                     return new Tuple<ProjectDto, List<UserDto>>(projectDetails, users);
                 }
             }
